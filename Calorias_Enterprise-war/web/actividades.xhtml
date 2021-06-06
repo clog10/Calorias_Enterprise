@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Registro actividad</title>
+    </h:head>
+    <h:body>
+        <center>
+            <f:view>
+                <h:form>
+                    <h1><h:outputText value="Registra Actividad"/></h1>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Descripcion:" for="descripcion" />
+                        <h:inputText id="descripcion" value="#{cTactividad.tactividad.descripcion}" title="Descripcion" />
+                        <h:outputLabel value="Actividades:" for="actividades" />
+                        <h:inputText id="actividades" value="#{cTactividad.tactividad.actividades}" title="Actividades" />
+                    </h:panelGrid>
+                    <h:commandButton value="Registrar" actionListener="#{cTactividad.registrar()}" action="actividades.xhtml"/>
+                </h:form>
+            </f:view>
+        </center>
+    </h:body>
+</html>

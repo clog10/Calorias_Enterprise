@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Carlos de Jesús Gutierrez Loaeza</title>
+    </h:head>
+    <h:body>
+        <center>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Lista de Actividades Registradas"/></h1>
+                <h:dataTable value="#{cTactividad.actividades()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idtact"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idtact}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descripcion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Actividades"/>
+                        </f:facet>
+                        <h:outputText value="#{item.actividades}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        </center>
+    </h:body>
+</html>
+
