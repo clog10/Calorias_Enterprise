@@ -47,12 +47,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Contrasenia"/>
-                            </f:facet>
-                            <h:outputText value="#{item.contrasenia}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="Fechanacimiento"/>
                             </f:facet>
                             <h:outputText value="#{item.fechanacimiento}">
@@ -61,11 +55,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Tipoact"/>
+                                <h:outputText value="Tipo de actividad"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoact}"/>
+                            <h:outputText value="#{item.tipoact.getDescripcion()}"/>
                         </h:column>
                     </h:dataTable>
+                    <h:commandButton value="Regresar al Inicio" action="index.xhtml"/>
                 </h:form>
             </f:view>
         </center>
