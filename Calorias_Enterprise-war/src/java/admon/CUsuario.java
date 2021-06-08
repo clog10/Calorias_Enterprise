@@ -8,7 +8,6 @@ package admon;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import log_neg.LNTipoA;
@@ -29,7 +28,7 @@ public class CUsuario implements Serializable {
 
     @EJB
     private LNUsuario lNUsuario;
-    
+
     private Usuario usuario;
     private int idAct;
 
@@ -55,32 +54,23 @@ public class CUsuario implements Serializable {
     public void setIdAct(int idAct) {
         this.idAct = idAct;
     }
-    
-    public Tipoactividad actividad(){
-        List<Tipoactividad> ac = new ArrayList<>();
-       for(Tipoactividad a:lNTipoA.actividades()){
-           ac.add(a);
-       }
-       
-       for(Tipoactividad a:ac){
-           if(a.getIdtact()==idAct){
-               return a;
-           }
-       }
-       return null;
+
+    public Tipoactividad actividad() {
+        for (Tipoactividad a : lNTipoA.actividades()) {
+            if (a.getIdtact() == idAct) {
+                return a;
+            }
+        }
+        return null;
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         usuario.setTipoact(actividad());
         lNUsuario.registrar(usuario);
     }
-    
-       public List<Usuario> usuarios(){
-       List<Usuario> us = new ArrayList<>();
-       for(Usuario a:lNUsuario.usuarios()){
-           us.add(a);
-       }
-       return us;
-   }
-    
+
+    public List<Usuario> usuarios() {
+        return lNUsuario.usuarios();
+    }
+
 }

@@ -8,8 +8,6 @@ package admon;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import log_neg.LNIndicadores;
 import log_neg.LNUsuario;
@@ -23,13 +21,13 @@ import modelo.Usuario;
 @Named(value = "cIndicadores")
 @SessionScoped
 public class CIndicadores implements Serializable {
-    
+
     @EJB
     private LNUsuario lNUsuario;
-    
+
     @EJB
     private LNIndicadores lNIndicadores;
-    
+
     private Indicadoressalud indicadores;
 
     /**
@@ -38,31 +36,27 @@ public class CIndicadores implements Serializable {
     public CIndicadores() {
         indicadores = new Indicadoressalud();
     }
-    
+
     public Indicadoressalud getIndicadores() {
         return indicadores;
     }
-    
+
     public void setIndicadores(Indicadoressalud indicadores) {
         this.indicadores = indicadores;
     }
-    
+
     public void registrar() {
         indicadores.setIdusuario(usuario());
         indicadores.setTipoact(usuario().getTipoact());
         lNIndicadores.registrar(indicadores);
     }
-    
+
     public Usuario usuario() {
-        List<Usuario> us = new ArrayList<>();
-        for (Usuario a : lNUsuario.usuarios()) {
-            us.add(a);
-        }
-        
-        int a = us.size();
-        Usuario ultimo = us.get(a - 1);
-        
+
+        int a = lNUsuario.usuarios().size();
+        Usuario ultimo = lNUsuario.usuarios().get(a - 1);
+
         return ultimo;
     }
-    
+
 }

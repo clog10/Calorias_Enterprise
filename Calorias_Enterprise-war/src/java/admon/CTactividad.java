@@ -8,7 +8,6 @@ package admon;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import log_neg.LNTipoA;
@@ -45,12 +44,8 @@ public class CTactividad implements Serializable {
     public void registrar() {
         lNTipoA.registrar(tactividad);
     }
-    
-   public List<Tipoactividad> actividades(){
-       List<Tipoactividad> ac = new ArrayList<>();
-       for(Tipoactividad a:lNTipoA.actividades()){
-           ac.add(a);
-       }
-       return ac;
-   }
+
+    public List<Tipoactividad> actividades() {
+        return lNTipoA.actividades();
+    }
 }
