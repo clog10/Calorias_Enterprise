@@ -31,4 +31,9 @@ public class LNUsuario {
         List<Usuario> us = usuarioFacade.findAll();
         return us;
     }
+    
+    public Usuario buscaUsuario(int id){
+        return usuarioFacade.find(id);
+    }
+     
 }

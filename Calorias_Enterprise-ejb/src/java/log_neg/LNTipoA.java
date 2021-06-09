@@ -32,4 +32,8 @@ public class LNTipoA {
         return ac;
     }
     
+    public Tipoactividad buscaActividad(int id){
+        return tipoactividadFacade.find(id);
+    }
+    
 }

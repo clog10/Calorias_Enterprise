@@ -8,6 +8,8 @@ package admon;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import log_neg.LNTipoA;
@@ -30,13 +32,24 @@ public class CUsuario implements Serializable {
     private LNUsuario lNUsuario;
 
     private Usuario usuario;
-    private int idAct;
+    private Tipoactividad tipo;
+    private Date fechaRegistro;
 
     /**
      * Creates a new instance of CUsuario
      */
     public CUsuario() {
         usuario = new Usuario();
+        tipo = new Tipoactividad();
+        fechaRegistro = new Date();
+    }
+
+    public Tipoactividad getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipoactividad tipo) {
+        this.tipo = tipo;
     }
 
     public Usuario getUsuario() {
@@ -47,25 +60,9 @@ public class CUsuario implements Serializable {
         this.usuario = usuario;
     }
 
-    public int getIdAct() {
-        return idAct;
-    }
-
-    public void setIdAct(int idAct) {
-        this.idAct = idAct;
-    }
-
-    public Tipoactividad actividad() {
-        for (Tipoactividad a : lNTipoA.actividades()) {
-            if (a.getIdtact() == idAct) {
-                return a;
-            }
-        }
-        return null;
-    }
-
     public void registrar() {
-        usuario.setTipoact(actividad());
+        usuario.setFecharegistro(fechaRegistro);
+        usuario.setTipoact(lNTipoA.buscaActividad(tipo.getIdtact()));
         lNUsuario.registrar(usuario);
     }
 

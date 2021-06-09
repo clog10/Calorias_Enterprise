@@ -10,12 +10,12 @@
         <center>
             <f:view>
                 <h:form>
-                    <h1><h:outputText value="Crear Indicadores de #{cIndicadores.usuario().nombre}"/></h1>
+                    <h1><h:outputText value="Crear Indicadores"/></h1>
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="Fecha:" for="fecha" />
-                        <h:inputText id="fecha" value="#{cIndicadores.indicadores.fecha}" label="Fecha" required="true" requiredMessage="Valor obligatorio">
-                            <f:convertDateTime pattern="MM/dd/yyyy"/>
-                        </h:inputText>
+                        <h:outputLabel value="Usuario:" for="usuario" />
+                        <h:selectOneMenu id="usuario" value="#{cIndicadores.usuario.idusuario}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
+                            <f:selectItems value="#{cUsuario.usuarios()}" var="usuario" itemLabel="#{usuario.nombre}" itemValue="#{usuario.idusuario}"/>
+                        </h:selectOneMenu>
                         <h:outputLabel value="Peso:" for="peso" />
                         <h:inputText id="peso" value="#{cIndicadores.indicadores.peso}" label="Peso" required="true" requiredMessage="Valor obligatorio">
                             <f:convertNumber minIntegerDigits="1" maxIntegerDigits="3"/>
@@ -37,7 +37,7 @@
                             <f:validateLongRange minimum="60" maximum="105"/>
                         </h:inputText>
                     </h:panelGrid> 
-                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}"/>
+                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}" action="index.xhtml"/>
                     <p>
                         <h:message for = "peso" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
                     </p>
