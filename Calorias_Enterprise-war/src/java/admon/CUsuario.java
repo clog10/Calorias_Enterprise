@@ -5,13 +5,17 @@
  */
 package admon;
 
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import log_neg.LNTipoA;
 import log_neg.LNUsuario;
 import modelo.Tipoactividad;
@@ -35,6 +39,11 @@ public class CUsuario implements Serializable {
     private Tipoactividad tipo;
     private Date fechaRegistro;
 
+    private String user;
+    private String pass;
+    
+    private String rebote = "Usuario y/o Password incorrectos";
+
     /**
      * Creates a new instance of CUsuario
      */
@@ -42,6 +51,22 @@ public class CUsuario implements Serializable {
         usuario = new Usuario();
         tipo = new Tipoactividad();
         fechaRegistro = new Date();
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public Tipoactividad getTipo() {
@@ -70,4 +95,25 @@ public class CUsuario implements Serializable {
         return lNUsuario.usuarios();
     }
 
+    public String ingresar() {
+        for (Usuario u : lNUsuario.usuarios()) {
+            if (u.getUsuario().equals(user) && u.getContrasenia().equals(pass)) {
+                return "indicadores";
+            }
+        }
+        return "login";
+    }
+
+    public String getRebote() {
+        return rebote;
+    }
+
+    public void setRebote(String rebote) {
+        this.rebote = rebote;
+    }
+    
+     public void error() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", rebote));
+    }
+    
 }
