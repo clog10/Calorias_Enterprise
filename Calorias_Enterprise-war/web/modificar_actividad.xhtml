@@ -11,10 +11,10 @@
             <h1><h:outputText value="Actualizar Actividad del usuario #{cUsuario.nombre.nombre}"/></h1>
             <h:form>
                 <h:panelGrid columns="2">
-                <h:outputLabel value="Tipoact:" for="tipoact" />
-                        <h:selectOneMenu id="tipoact" value="#{cUsuario.tipo.idtact}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
-                            <f:selectItems value="#{cTactividad.actividades()}" var="actividad" itemLabel="#{actividad.descripcion} (#{actividad.actividades})" itemValue="#{actividad.idtact}"/>
-                        </h:selectOneMenu>
+                    <h:outputLabel value="Tipoact:" for="tipoact" />
+                    <h:selectOneMenu id="tipoact" value="#{cUsuario.tipo.idtact}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
+                        <f:selectItems value="#{cTactividad.actividades()}" var="actividad" itemLabel="#{actividad.descripcion} (#{actividad.actividades})" itemValue="#{actividad.idtact}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandButton value="Actualizar" actionListener="#{cUsuario.actualizar()}" action="login.xhtml"/>
             </h:form>

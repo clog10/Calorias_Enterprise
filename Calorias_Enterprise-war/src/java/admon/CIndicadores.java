@@ -39,7 +39,7 @@ public class CIndicadores implements Serializable {
     private String pass;
 
     private char indice;
-    
+
     /**
      * Creates a new instance of CIndicadores
      */
@@ -100,8 +100,8 @@ public class CIndicadores implements Serializable {
         indicadores.setTipoact(u.getTipoact());
         lNIndicadores.registrar(indicadores);
     }
-    
-    public void eliminar(Indicadoressalud indicador){
+
+    public void eliminar(Indicadoressalud indicador) {
         lNIndicadores.eliminar(indicador);
     }
 
@@ -123,15 +123,15 @@ public class CIndicadores implements Serializable {
         }
         return indicadores;
     }
-    
-    public String mostrar(){
-        if('S' == indice){
+
+    public String mostrar() {
+        if ('S' == indice) {
             return "resultados";
         }
         return "index";
     }
-    
-        public double imc() {
+
+    public double imc() {
         double estatura = indicadores.getEstatura() / 100;
         return indicadores.getPeso() / (estatura * estatura);
     }
