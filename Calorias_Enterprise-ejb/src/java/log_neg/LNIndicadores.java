@@ -6,6 +6,7 @@
 package log_neg;
 
 import acceso_datos.IndicadoressaludFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -26,4 +27,11 @@ public class LNIndicadores {
         indicadoressaludFacade.create(indicadores);
     }
     
+    public List<Indicadoressalud> indicadores(){
+        return indicadoressaludFacade.findAll();
+    }
+    
+    public void eliminar(Indicadoressalud indicadores){
+        indicadoressaludFacade.remove(indicadores);
+    }
 }

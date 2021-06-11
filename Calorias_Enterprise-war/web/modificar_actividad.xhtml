@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Carlos de Jesús Gutierrez Loaeza</title>
+    </h:head>
+    <h:body>
+        <center>
+            <h1><h:outputText value="Actualizar Actividad del usuario #{cUsuario.nombre.nombre}"/></h1>
+            <h:form>
+                <h:panelGrid columns="2">
+                <h:outputLabel value="Tipoact:" for="tipoact" />
+                        <h:selectOneMenu id="tipoact" value="#{cUsuario.tipo.idtact}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
+                            <f:selectItems value="#{cTactividad.actividades()}" var="actividad" itemLabel="#{actividad.descripcion} (#{actividad.actividades})" itemValue="#{actividad.idtact}"/>
+                        </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton value="Actualizar" actionListener="#{cUsuario.actualizar()}" action="login.xhtml"/>
+            </h:form>
+        </center>
+    </h:body>
+</html>
+

@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Carlos de Jesús Gutierrez Loaeza</title>
     </h:head>
@@ -9,23 +10,24 @@
         <center>
             <h1><h:outputText value="Inicia sesión para poder registrar tus Indicadores de salud"/></h1>
             <h:form>
+
                 <h3><h:outputText value="Si no estás registrado, por favor registrate"/></h3>
                 <h:commandButton value="Quiero Registrarme" action="usuario.xhtml" />
-                <h3><h:outputText value="Si desea modificar su actividad"/></h3>
-                <h:commandButton value="Modificar mi Actividad" action="login_actividad.xhtml"/>
             </h:form>
             <br></br>
             <br></br>
-            <h2><h:outputText value="Ingresa tus credenciales para registrar indicadores de salud"/></h2>
+            <h2><h:outputText value="Ingresa tus credenciales para modificar tu actividad"/></h2>
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Usuario:" for="user" />
-                    <h:inputText id="user" value="#{cIndicadores.user}" label="Usuario" required="true" requiredMessage="Valor obligatorio"/>
+                    <h:inputText id="user" value="#{cUsuario.user}" label="Usuario" required="true" requiredMessage="Valor obligatorio"/>
                     <h:outputLabel value="Password:" for="pass" />
-                    <h:inputSecret id="pass" value="#{cIndicadores.pass}" label="Password" required="true" requiredMessage="Valor obligatorio"/>
+                    <h:inputSecret id="pass" value="#{cUsuario.pass}" label="Password" required="true" requiredMessage="Valor obligatorio"/>
                 </h:panelGrid>
-                <h:commandButton value="Ingresar" action="#{cIndicadores.ingresar()}"/>
+                <h:commandButton value="Ingresar" action="#{cUsuario.cambiarActividad()}"/>
             </h:form>
+            
         </center>
     </h:body>
 </html>
+

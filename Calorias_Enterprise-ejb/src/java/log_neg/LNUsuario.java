@@ -27,6 +27,10 @@ public class LNUsuario {
         usuarioFacade.create(user);
     }
     
+    public void actualizar(Usuario user){
+        usuarioFacade.edit(user);
+    }
+    
     public List<Usuario> usuarios(){
         List<Usuario> us = usuarioFacade.findAll();
         return us;
@@ -34,6 +38,24 @@ public class LNUsuario {
     
     public Usuario buscaUsuario(int id){
         return usuarioFacade.find(id);
+    }
+    
+    public Usuario buscaPorUsuario(String user, String pass){
+        for(Usuario u : usuarioFacade.findAll()){
+            if(u.getUsuario().equals(user) && u.getContrasenia().equals(pass)){
+                return u;
+            }
+        }
+        return null;
+    }
+    
+    public Usuario buscaPorNombre(String nombre){
+        for(Usuario u : usuarioFacade.findAll()){
+            if(u.getUsuario().equals(nombre)){
+                return u;
+            }
+        }
+        return null;
     }
      
 }

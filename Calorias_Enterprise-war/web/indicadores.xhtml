@@ -10,12 +10,10 @@
         <center>
             <f:view>
                 <h:form>
-                    <h1><h:outputText value="Crear Indicadores"/></h1>
+                    <h1><h:outputText value="Registrar Indicadores de Salud"/></h1>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Usuario:" for="usuario" />
-                        <h:selectOneMenu id="usuario" value="#{cIndicadores.usuario.idusuario}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
-                            <f:selectItems value="#{cUsuario.usuarios()}" var="usuario" itemLabel="#{usuario.nombre}" itemValue="#{usuario.idusuario}"/>
-                        </h:selectOneMenu>
+                        <h:inputText id="usuario" value="#{cIndicadores.getNombre().idusuario}, #{cIndicadores.getNombre().nombre}" label="Usuario" disabled="true"/>
                         <h:outputLabel value="Peso:" for="peso" />
                         <h:inputText id="peso" value="#{cIndicadores.indicadores.peso}" label="Peso" required="true" requiredMessage="Valor obligatorio">
                             <f:convertNumber minIntegerDigits="1" maxIntegerDigits="3"/>
@@ -36,8 +34,15 @@
                             <f:convertNumber minIntegerDigits="1" maxIntegerDigits="3"/>
                             <f:validateLongRange minimum="60" maximum="105"/>
                         </h:inputText>
+                        <h:outputLabel value="¿Desea que le mostremos sus indices?" for="indice" />
+                        <h:selectOneRadio id="indice" value="#{cIndicadores.indice}" label="Indice" required="true" requiredMessage="Valor obligatorio">
+                            <f:selectItem
+                                itemLabel="Si" itemValue="S"/>
+                            <f:selectItem 
+                                itemLabel="No" itemValue="N"/>
+                        </h:selectOneRadio>  
                     </h:panelGrid> 
-                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}" action="index.xhtml"/>
+                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}" action="#{cIndicadores.mostrar()}"/>
                     <p>
                         <h:message for = "peso" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
                     </p>
@@ -53,6 +58,69 @@
                     <p>
                         <h:message for = "fechareg" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
                     </p>
+                </h:form>
+            </f:view>
+            <f:view>
+                <h:form>
+                    <h1><h:outputText value="Lista de indicadores del usuario #{cIndicadores.getNombre().idusuario}, #{cIndicadores.getNombre().nombre}"/></h1>
+                    <h:dataTable value="#{cIndicadores.indicadoresUsuario()}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Idindsalud"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idindsalud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Peso"/>
+                            </f:facet>
+                            <h:outputText value="#{item.peso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estatura"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estatura}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cintura"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cintura}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cadera"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cadera}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipoact"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoact.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Idusuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idusuario.idusuario}, #{item.idusuario.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Eliminar"/>
+                            </f:facet>
+                            <h:commandButton value="Eliminar" actionListener="#{cIndicadores.eliminar(item)}"/>
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
             </f:view>
 

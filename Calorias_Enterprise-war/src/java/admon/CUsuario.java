@@ -5,17 +5,12 @@
  */
 package admon;
 
-import javax.faces.context.FacesContext;
-import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import log_neg.LNTipoA;
 import log_neg.LNUsuario;
 import modelo.Tipoactividad;
@@ -41,8 +36,6 @@ public class CUsuario implements Serializable {
 
     private String user;
     private String pass;
-    
-    private String rebote = "Usuario y/o Password incorrectos";
 
     /**
      * Creates a new instance of CUsuario
@@ -91,6 +84,12 @@ public class CUsuario implements Serializable {
         lNUsuario.registrar(usuario);
     }
 
+    public void actualizar() {
+        usuario = getNombre();
+        usuario.setTipoact(lNTipoA.buscaActividad(tipo.getIdtact()));
+        lNUsuario.actualizar(usuario);
+    }
+
     public List<Usuario> usuarios() {
         return lNUsuario.usuarios();
     }
@@ -104,16 +103,17 @@ public class CUsuario implements Serializable {
         return "login";
     }
 
-    public String getRebote() {
-        return rebote;
+    public String cambiarActividad() {
+        for (Usuario u : lNUsuario.usuarios()) {
+            if (u.getUsuario().equals(user) && u.getContrasenia().equals(pass)) {
+                return "modificar_actividad";
+            }
+        }
+        return "login";
     }
 
-    public void setRebote(String rebote) {
-        this.rebote = rebote;
+    public Usuario getNombre() {
+        return lNUsuario.buscaPorUsuario(user, pass);
     }
-    
-     public void error() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", rebote));
-    }
-    
+
 }
