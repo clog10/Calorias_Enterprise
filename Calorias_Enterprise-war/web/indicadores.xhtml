@@ -34,15 +34,8 @@
                             <f:convertNumber minIntegerDigits="1" maxIntegerDigits="3"/>
                             <f:validateLongRange minimum="60" maximum="105"/>
                         </h:inputText>
-                        <h:outputLabel value="¿Desea que le mostremos sus indices?" for="indice" />
-                        <h:selectOneRadio id="indice" value="#{cIndicadores.indice}" label="Indice" required="true" requiredMessage="Valor obligatorio">
-                            <f:selectItem
-                                itemLabel="Si" itemValue="S"/>
-                            <f:selectItem 
-                                itemLabel="No" itemValue="N"/>
-                        </h:selectOneRadio>  
                     </h:panelGrid> 
-                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}" action="#{cIndicadores.mostrar()}"/>
+                    <h:commandButton value="Registrar" actionListener="#{cIndicadores.registrar()}" action="indicadores"/>
                     <p>
                         <h:message for = "peso" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
                     </p>
@@ -116,9 +109,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Eliminar"/>
+                                <h:outputText value="IMC y ICC"/>
                             </f:facet>
-                            <h:commandButton value="Eliminar" actionListener="#{cIndicadores.eliminar(item)}"/>
+                            <h:commandButton value="Calcular" actionListener="#{cIndicadores.calcular(item)}" action="resultados"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">  
+                                <h:commandButton value="Eliminar elementos Seleccionados" actionListener="#{cIndicadores.eliminaSeleccion()}"/>
+                            </f:facet>
+                            <h:selectBooleanCheckbox value="#{cIndicadores.checked[item]}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>

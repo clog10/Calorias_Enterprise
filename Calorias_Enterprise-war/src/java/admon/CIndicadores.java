@@ -10,7 +10,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import log_neg.LNIndicadores;
 import log_neg.LNUsuario;
@@ -37,8 +39,8 @@ public class CIndicadores implements Serializable {
 
     private String user;
     private String pass;
-
-    private char indice;
+    private Map<Indicadoressalud, Boolean> checked = new HashMap<>();
+    private List<Indicadoressalud> indicadoresSeleccionados = new ArrayList<>();
 
     /**
      * Creates a new instance of CIndicadores
@@ -47,6 +49,14 @@ public class CIndicadores implements Serializable {
         indicadores = new Indicadoressalud();
         fechaRegistro = new Date();
         usuario = new Usuario();
+    }
+
+    public Map<Indicadoressalud, Boolean> getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Map<Indicadoressalud, Boolean> checked) {
+        this.checked = checked;
     }
 
     public Usuario getUsuario() {
@@ -85,14 +95,6 @@ public class CIndicadores implements Serializable {
         return lNUsuario.buscaPorUsuario(user, pass);
     }
 
-    public char getIndice() {
-        return indice;
-    }
-
-    public void setIndice(char indice) {
-        this.indice = indice;
-    }
-
     public void registrar() {
         indicadores.setFecha(fechaRegistro);
         Usuario u = getNombre();
@@ -103,6 +105,10 @@ public class CIndicadores implements Serializable {
 
     public void eliminar(Indicadoressalud indicador) {
         lNIndicadores.eliminar(indicador);
+    }
+
+    public void calcular(Indicadoressalud indicador) {
+        indicadores = indicador;
     }
 
     public String ingresar() {
@@ -124,13 +130,6 @@ public class CIndicadores implements Serializable {
         return indicadores;
     }
 
-    public String mostrar() {
-        if ('S' == indice) {
-            return "resultados";
-        }
-        return "index";
-    }
-
     public double imc() {
         double estatura = indicadores.getEstatura() / 100;
         return indicadores.getPeso() / (estatura * estatura);
@@ -138,6 +137,16 @@ public class CIndicadores implements Serializable {
 
     public double icc() {
         return indicadores.getCintura() / indicadores.getCadera();
+    }
+
+    public void eliminaSeleccion() {
+        for (Indicadoressalud item : indicadoresUsuario()) {
+            if (checked.get(item) != null) {
+                if (checked.get(item)) {
+                    eliminar(item);
+                }
+            }
+        }
     }
 
 }
